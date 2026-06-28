@@ -1,2 +1,2 @@
-# py-bots-learning
+# TypeScript-Learning
 bebebe
