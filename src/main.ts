@@ -53,3 +53,7 @@ function talk(language: lang){
 talk('NodeJs')
 
 type EventName = 'click' | 'add' | 'delete'; 
+
+// Взаимодействия с внеш обьектами на странице
+
+const button: any = document.getElementById('butt')

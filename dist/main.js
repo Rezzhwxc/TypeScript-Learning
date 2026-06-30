@@ -30,3 +30,5 @@ function talk(language) {
     }
 }
 talk('NodeJs');
+// Взаимодействия с внеш обьектами на странице
+const button = document.getElementById('butt');
