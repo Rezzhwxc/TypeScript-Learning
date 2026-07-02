@@ -30,5 +30,11 @@ function talk(language) {
     }
 }
 talk('NodeJs');
+const response = {
+    meta: { title: 'Morphosis' },
+    data: { title: 'today' },
+    requestId: 'bebe12'
+};
+console.log(response);
 // Взаимодействия с внеш обьектами на странице
 const button = document.getElementById('butt');

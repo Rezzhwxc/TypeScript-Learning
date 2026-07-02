@@ -54,6 +54,35 @@ talk('NodeJs')
 
 type EventName = 'click' | 'add' | 'delete'; 
 
+// Джинерики
+
+interface MetaData{
+
+}
+
+interface Users{
+    username: string;
+}
+
+interface Article{
+    title: string;
+}
+
+interface ApiResp<Meta, Data>{
+    stasus?: 'error' | 'success'
+    meta?: Meta;
+    requestId: string;
+    data: Data;
+}
+
+const response: ApiResp<Article, Article> = {
+    meta: {title: 'Morphosis'} ,
+    data: {title: 'today'},
+
+    requestId: 'bebe12'
+}
+console.log(response)
+
 // Взаимодействия с внеш обьектами на странице
 
 const button: any = document.getElementById('butt')
