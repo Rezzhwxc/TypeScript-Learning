@@ -35,6 +35,10 @@ const response = {
     data: { title: 'today' },
     requestId: 'bebe12'
 };
-console.log(response);
+const VocaloidNode = {
+    id: 1,
+    name: 'Miku',
+    team: 'Crypton'
+};
 // Взаимодействия с внеш обьектами на странице
 const button = document.getElementById('butt');

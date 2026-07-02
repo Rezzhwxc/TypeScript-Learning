@@ -56,10 +56,6 @@ type EventName = 'click' | 'add' | 'delete';
 
 // Джинерики
 
-interface MetaData{
-
-}
-
 interface Users{
     username: string;
 }
@@ -81,7 +77,21 @@ const response: ApiResp<Article, Article> = {
 
     requestId: 'bebe12'
 }
-console.log(response)
+
+// Джинерик пример2
+
+interface Vocaloid<T>{
+    id: number;
+    name: string;
+    team?: T; 
+}
+
+const VocaloidNode: Vocaloid<string | number | boolean> = {
+    id: 1,
+    name: 'Miku',
+    team: 'Crypton'
+}
+
 
 // Взаимодействия с внеш обьектами на странице
 
