@@ -268,4 +268,40 @@ type Uxsr = Base & {
 }
 
 type SetState = [string, string, 1 | 2 | 3];
-const tupple: SetState = ['Tetotism', 'C/users/mucis', 2]
+const tupple: SetState = ['Tetotism', 'C/users/mucis', 2];
+
+// mapped types
+
+interface Buyer{
+    name: string,
+    age: number,
+    friends?: Array<string>
+}
+
+type ReadonlyType<T> = {
+    readonly [key in keyof T]?: T [key] | null;
+}
+type UnReadonlyType<T> = {
+    -readonly [key in keyof T]-?: T [key] | null;
+}
+
+type NewBuyer = ReadonlyType<Buyer>;
+type NewBuyer2 = UnReadonlyType<NewBuyer>;
+
+// Utility types
+
+type NewByuer3 = Pick<Buyer, 'age'>; // цепление полей значений
+type NewByuer4 = Omit<Buyer, 'age'>; // исключение полей значений 
+
+type Color = 'red' | 'black' | 'white';
+
+type  NarrowColor = Exclude<Color, 'red'>; // та же суть с юнионами
+type NarrowColor2 = Extract<Color, 'red'>; // та же суть с юнионами
+
+type Color2 = 'red' | 'black' | 'white';
+
+const ColorsArray: Record<Color2, string[]> = { //создание обьектов с указанными ключами
+    red: ['123'],
+    black: ['123'],
+    white: ['123']
+}

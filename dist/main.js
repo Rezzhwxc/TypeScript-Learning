@@ -141,3 +141,8 @@ butt.addEventListener('click', () => {
     }
 });
 const tupple = ['Tetotism', 'C/users/mucis', 2];
+const ColorsArray = {
+    red: ['123'],
+    black: ['123'],
+    white: ['123']
+};
