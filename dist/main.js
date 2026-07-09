@@ -84,3 +84,13 @@ function fnc3(arg) {
 fnc3({
     count: num
 });
+// type guards
+function isVocal(value) {
+    return 'username' in value;
+}
+function isCar(value) {
+    return 'MaxSpeed' in value && 'width' in value;
+}
+function isDriver(value) {
+    return 'name' in value;
+}

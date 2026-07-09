@@ -164,3 +164,30 @@ function fnc3(arg: VocalName | VocalTracks){
 fnc3({
     count: num
 });
+
+// type guards
+
+function isVocal(value: User | VocalName): value is User{
+     return 'username' in value;
+}
+
+//
+
+interface car{
+    maxSpeed: number;
+    width: number;
+    cost: number;
+}
+
+interface driver{
+    name: string;
+    age?: number;
+}
+
+function isCar(value: car | driver): value is car{
+    return 'MaxSpeed' in value && 'width' in value;
+}
+
+function isDriver(value: car | driver): value is driver{
+    return 'name' in value;
+}
