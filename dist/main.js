@@ -146,3 +146,23 @@ const ColorsArray = {
     black: ['123'],
     white: ['123']
 };
+// Asserts
+function assertIsUser(data) {
+    if (typeof data !== "object" || data === null) {
+        throw new Error("Object expected!");
+    }
+    if (typeof data.username !== 'string') {
+        throw new Error("Property `name` must be a string");
+    }
+    if (typeof data.age !== 'number') {
+        throw new Error("Property `age` must be a number");
+    }
+}
+// 
+function assert(condition, msg) {
+    if (!condition)
+        throw new Error(msg);
+}
+let age = 25;
+assert(age !== null, 'age не может быть null');
+age.toFixed(2);
