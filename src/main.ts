@@ -80,7 +80,7 @@ const response: ApiResp<Article, Article> = {
 
 // Джинерик пример2
 
-interface Vocaloid<T>{
+interface Vocaloid<T = number>{
     id: number;
     name: string;
     team?: T; 
@@ -92,7 +92,23 @@ const VocaloidNode: Vocaloid<string | number | boolean> = {
     team: 'Crypton'
 }
 
+const VocaloidNode2: Vocaloid<Users> = {
+    id: 1,
+    name: 'Teto',
+    team: {
+        username: 'Deko'
+    }
+}
 
-// Взаимодействия с внеш обьектами на странице
+// Условные типы
 
-const button: any = document.getElementById('butt')
+type isType<T> = T extends any[] ? true: false;
+
+const Arr: isType<string> = false;
+const Arr2: isType<string[]> = true;
+
+// 
+
+type RandomName<T> = T extends Users ? {value: number} : {value: string}
+
+const names: RandomName<number> = {value: 'tetoo'}

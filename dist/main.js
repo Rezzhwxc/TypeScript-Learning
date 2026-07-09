@@ -40,5 +40,13 @@ const VocaloidNode = {
     name: 'Miku',
     team: 'Crypton'
 };
-// Взаимодействия с внеш обьектами на странице
-const button = document.getElementById('butt');
+const VocaloidNode2 = {
+    id: 1,
+    name: 'Teto',
+    team: {
+        username: 'Deko'
+    }
+};
+const Arr = false;
+const Arr2 = true;
+const names = { value: 'tetoo' };
