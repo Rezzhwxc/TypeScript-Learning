@@ -208,12 +208,24 @@ const obj1: Obj0 = {
 
 // Перечисления Enum
 
-enum ColorVoc {
-    RED = 'red',
+enum ColorVoc { //ключевое перечисление
+    RED = 'red', 
     BLUE = 'blue',
     YELLOW = 'yellow',
     WHITE = 'white'
 }
+
+// 
+
+enum ColorVoc2 { //числовое перечисление
+    RED,
+    BLUE,
+    YELLOW ,
+    WHITE
+}
+console.log(ColorVoc2[0])
+
+// 
 
 const butt = document.getElementById('butt') as HTMLElement;
 let flag: number = 0;
@@ -233,5 +245,27 @@ butt.addEventListener('click', () => {
     else if(flag === 1){
         setColor(ColorVoc.WHITE)
     flag = 0;
+    console.clear();
 }
 })
+
+// Различия типизации на примере
+
+type Literal = 'red' | 'green'
+type Primitive = number;
+
+interface Base{
+    username: string,
+    age: number
+}
+
+interface Usxr extends Base{
+    pass: string
+}
+// 
+type Uxsr = Base & {
+    pass: string
+}
+
+type SetState = [string, string, 1 | 2 | 3];
+const tupple: SetState = ['Tetotism', 'C/users/mucis', 2]

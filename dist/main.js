@@ -111,6 +111,16 @@ var ColorVoc;
     ColorVoc["YELLOW"] = "yellow";
     ColorVoc["WHITE"] = "white";
 })(ColorVoc || (ColorVoc = {}));
+// 
+var ColorVoc2;
+(function (ColorVoc2) {
+    ColorVoc2[ColorVoc2["RED"] = 0] = "RED";
+    ColorVoc2[ColorVoc2["BLUE"] = 1] = "BLUE";
+    ColorVoc2[ColorVoc2["YELLOW"] = 2] = "YELLOW";
+    ColorVoc2[ColorVoc2["WHITE"] = 3] = "WHITE";
+})(ColorVoc2 || (ColorVoc2 = {}));
+console.log(ColorVoc2[0]);
+// 
 const butt = document.getElementById('butt');
 let flag = 0;
 function setColor(color) {
@@ -127,5 +137,7 @@ butt.addEventListener('click', () => {
     else if (flag === 1) {
         setColor(ColorVoc.WHITE);
         flag = 0;
+        console.clear();
     }
 });
+const tupple = ['Tetotism', 'C/users/mucis', 2];
