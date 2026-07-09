@@ -103,3 +103,29 @@ const obj1 = {
     name: 'ebebe',
     age: 23,
 };
+// Перечисления Enum
+var ColorVoc;
+(function (ColorVoc) {
+    ColorVoc["RED"] = "red";
+    ColorVoc["BLUE"] = "blue";
+    ColorVoc["YELLOW"] = "yellow";
+    ColorVoc["WHITE"] = "white";
+})(ColorVoc || (ColorVoc = {}));
+const butt = document.getElementById('butt');
+let flag = 0;
+function setColor(color) {
+    if (butt) {
+        butt.style.backgroundColor = color;
+    }
+}
+butt.addEventListener('click', () => {
+    if (flag === 0) {
+        setColor(ColorVoc.YELLOW);
+        flag = 1;
+        console.log(flag);
+    }
+    else if (flag === 1) {
+        setColor(ColorVoc.WHITE);
+        flag = 0;
+    }
+});

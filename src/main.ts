@@ -205,3 +205,33 @@ const obj1: Obj0 = {
     name: 'ebebe',
     age: 23,
 }
+
+// Перечисления Enum
+
+enum ColorVoc {
+    RED = 'red',
+    BLUE = 'blue',
+    YELLOW = 'yellow',
+    WHITE = 'white'
+}
+
+const butt = document.getElementById('butt') as HTMLElement;
+let flag: number = 0;
+
+function setColor(color: ColorVoc){
+    if(butt){
+    butt.style.backgroundColor = color;
+    }
+}
+
+butt.addEventListener('click', () => {
+    if(flag === 0){
+        setColor(ColorVoc.YELLOW)
+    flag = 1;
+    console.log(flag)
+}
+    else if(flag === 1){
+        setColor(ColorVoc.WHITE)
+    flag = 0;
+}
+})
