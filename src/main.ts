@@ -112,3 +112,55 @@ const Arr2: isType<string[]> = true;
 type RandomName<T> = T extends Users ? {value: number} : {value: string}
 
 const names: RandomName<number> = {value: 'tetoo'}
+
+
+// Сужение типов Narrowing
+
+function fnc(arg: number | string | null){
+    if(typeof arg === "number"){
+        arg.toString
+        return
+    } else if(typeof arg === "string"){
+        arg.toUpperCase
+        return
+    }
+}
+
+// 
+
+function fnc2(arg: number | string | null){
+    if(arg === null){
+    arg
+    }
+    if(arg === 5){
+        arg++
+    }
+    return arg
+}
+
+// 
+const num = 24;
+type color = 'blue' | 'red' | 'yellow';
+
+interface VocalName{
+    namev: string;
+    age: number;
+    color: color;
+}
+
+interface VocalTracks{
+    name?: VocalName;
+    count: number;
+}
+
+function fnc3(arg: VocalName | VocalTracks){
+    if('namev' in arg){
+        return arg
+    }
+    if('count' in arg){
+        console.log('Count tracks - ' + num)
+    }
+}
+fnc3({
+    count: num
+});

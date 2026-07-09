@@ -50,3 +50,37 @@ const VocaloidNode2 = {
 const Arr = false;
 const Arr2 = true;
 const names = { value: 'tetoo' };
+// Сужение типов Narrowing
+function fnc(arg) {
+    if (typeof arg === "number") {
+        arg.toString;
+        return;
+    }
+    else if (typeof arg === "string") {
+        arg.toUpperCase;
+        return;
+    }
+}
+// 
+function fnc2(arg) {
+    if (arg === null) {
+        arg;
+    }
+    if (arg === 5) {
+        arg++;
+    }
+    return arg;
+}
+// 
+const num = 24;
+function fnc3(arg) {
+    if ('namev' in arg) {
+        return arg;
+    }
+    if ('count' in arg) {
+        console.log('Count tracks - ' + num);
+    }
+}
+fnc3({
+    count: num
+});
