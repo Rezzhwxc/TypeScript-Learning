@@ -94,3 +94,12 @@ function isCar(value) {
 function isDriver(value) {
     return 'name' in value;
 }
+// TypeOf
+const obj = {
+    name: 'bebeeb',
+    age: 25,
+};
+const obj1 = {
+    name: 'ebebe',
+    age: 23,
+};

@@ -191,3 +191,17 @@ function isCar(value: car | driver): value is car{
 function isDriver(value: car | driver): value is driver{
     return 'name' in value;
 }
+
+// TypeOf
+
+const obj = {
+    name: 'bebeeb',
+    age: 25,
+}
+
+type Obj0 = typeof obj;
+
+const obj1: Obj0 = {
+    name: 'ebebe',
+    age: 23,
+}
