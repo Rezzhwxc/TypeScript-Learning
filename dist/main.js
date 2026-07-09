@@ -166,3 +166,12 @@ function assert(condition, msg) {
 let age = 25;
 assert(age !== null, 'age не может быть null');
 age.toFixed(2);
+// последняя тема: Условные типы и Infer
+function fn(arg1, arg2) {
+    if (typeof arg1 === typeof arg2) {
+        throw new Error("Not possible types");
+    }
+    else {
+        return [arg1, arg2];
+    }
+}

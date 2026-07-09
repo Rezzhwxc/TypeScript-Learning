@@ -329,3 +329,20 @@ function assert(condition: boolean, msg: string): asserts condition {
 let age: number | null = 25;
 assert(age !== null, 'age не может быть null');
 age.toFixed(2); 
+
+
+// последняя тема: Условные типы и Infer
+
+function fn(arg1: string, arg2: number): [string, number]{
+    if(typeof arg1 === typeof arg2){
+        throw new Error("Not possible types");
+    }else{
+        return [arg1, arg2]
+    }
+}
+
+type MyParams<T> = T extends (...arg: infer U) => any ? U : never; // U - заготовка для типа, ... - для неопределенного колва
+type MyReturnType<T> = T extends (...arg: any) => infer U ? U : never;
+
+type FnArg = MyParams<typeof fn>
+type FnReturn = MyReturnType<typeof fn>
