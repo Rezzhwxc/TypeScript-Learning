@@ -17,3 +17,22 @@ console.log(date);
 // #5
 date.month = 100;
 console.log(date);
+// #6
+let res = 0;
+for (let i = 0; i < 100; i++) {
+    res++;
+}
+console.log(res);
+// #7
+function sum(x, y) {
+    return x + y;
+}
+console.log(sum('bebe', 5));
+// #8
+let test12 = 123;
+let test22 = 'abc';
+let test32;
+test32 = test12;
+console.log(test32);
+test32 = test22;
+console.log(test32);

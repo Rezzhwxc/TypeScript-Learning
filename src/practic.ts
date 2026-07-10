@@ -24,4 +24,33 @@ console.log(date)
 
 // #5
 date.month = 100;
+
 console.log(date)
+
+// #6
+let res = 0;
+
+for (let i: number = 0; i < 100; i++) {
+	res++;
+}
+
+console.log(res);
+
+// #7
+function sum(x: string, y: number): string | number {
+	return x + y;
+}
+
+console.log(sum('bebe', 5))
+
+// #8
+let arrAny: any[] = [123, 'abc', true]
+
+// #9
+type nullUndefinded = null | undefined;
+const errorTest: nullUndefinded = null
+
+type allBool = boolean | null | undefined;
+const TruFal: allBool = boolTest
+
+// #10
