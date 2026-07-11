@@ -54,3 +54,29 @@ type allBool = boolean | null | undefined;
 const TruFal: allBool = boolTest
 
 // #10
+let answer: 'error' | 'warning' | 'success';
+
+answer = 'success';
+
+// #11
+type answer2 = 'error' | 'success';
+
+let bebe: answer2 = 'error'
+
+// #12
+type dateTest = [number, number, number];
+
+let userDateBuyer: dateTest = [2033, 8, 8]
+console.log(userDateBuyer)
+
+// #13
+const user: [string, number] = ['john', 31];
+user[0] = 'eric';
+
+console.log(user);
+
+// #14
+const userReadOnly: readonly [string, number] = ['john', 31];
+// userReadOnly[0] = 'eric'; error
+
+console.log(user);

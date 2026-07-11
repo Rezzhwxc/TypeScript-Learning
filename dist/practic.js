@@ -29,10 +29,20 @@ function sum(x, y) {
 }
 console.log(sum('bebe', 5));
 // #8
-let test12 = 123;
-let test22 = 'abc';
-let test32;
-test32 = test12;
-console.log(test32);
-test32 = test22;
-console.log(test32);
+let arrAny = [123, 'abc', true];
+const errorTest = null;
+const TruFal = boolTest;
+// #10
+let answer;
+answer = 'success';
+let bebe = 'error';
+let userDateBuyer = [2033, 8, 8];
+console.log(userDateBuyer);
+// #13
+const user = ['john', 31];
+user[0] = 'eric';
+console.log(user);
+// #14
+const userReadOnly = ['john', 31];
+// userReadOnly[0] = 'eric'; error
+console.log(user);
