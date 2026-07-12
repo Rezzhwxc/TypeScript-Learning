@@ -80,3 +80,44 @@ const userReadOnly: readonly [string, number] = ['john', 31];
 // userReadOnly[0] = 'eric'; error
 
 console.log(user);
+
+// #15
+interface Guest {
+	email: string,
+	password: string,
+	firstname: string,
+	nickname?: string
+}
+
+function ValidCheck(value: string | null): boolean {
+    return value !== null && value.trim() !== '';
+}
+
+function dialoge(){
+	const ask = confirm('Готовы ввести данные?');
+
+	if(ask){
+		const emailInput = prompt('Введите вашу почту') ?? '';
+		const passInput = prompt('Введите пароль') ?? '';
+		const nameInput = prompt('Введите ваше настоящее имя') ?? '';
+		const nicknameInput = prompt('Введите ваш никнейм') ?? '';
+
+		 if (!ValidCheck(emailInput) || !ValidCheck(passInput) || !ValidCheck(nameInput)) {
+        alert('Ошибка! Все обязательные поля должны быть заполнены.');
+        return dialoge();
+    	}
+
+		const guest: Guest = {
+			email: emailInput,
+			password: passInput,
+			firstname: nameInput,
+			nickname: nicknameInput || undefined,
+		}
+		console.log('Данные пользователя: ', guest)
+	}else{
+		alert('Лана че..')
+		return
+	}
+}
+
+dialoge()
