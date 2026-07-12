@@ -119,5 +119,32 @@ function dialoge(){
 		return
 	}
 }
+// dialoge()
 
-dialoge()
+// #16 operation Rest(...)
+
+let tpl: [string, ...number[]];
+tpl = ['bebebe', 1, 21, 2, 4];
+
+console.log(tpl)
+
+// #17
+enum Months{
+	september,
+	october,
+	november,
+	december,
+	JULY //
+}
+console.log(Months[4])
+
+let current: Months = Months.JULY
+console.log(current)
+
+// #18
+enum keys{
+	door1 = 1,
+	door2 = 2,
+	door3 = 3
+}
+console.log(keys[1])

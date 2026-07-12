@@ -73,4 +73,28 @@ function dialoge() {
         return;
     }
 }
-dialoge();
+// dialoge()
+// #16 operation Rest(...)
+let tpl;
+tpl = ['bebebe', 1, 21, 2, 4];
+console.log(tpl);
+// #17
+var Months;
+(function (Months) {
+    Months[Months["september"] = 0] = "september";
+    Months[Months["october"] = 1] = "october";
+    Months[Months["november"] = 2] = "november";
+    Months[Months["december"] = 3] = "december";
+    Months[Months["JULY"] = 4] = "JULY"; //
+})(Months || (Months = {}));
+console.log(Months[4]);
+let current = Months.JULY;
+console.log(current);
+// #18
+var keys;
+(function (keys) {
+    keys[keys["door1"] = 1] = "door1";
+    keys[keys["door2"] = 2] = "door2";
+    keys[keys["door3"] = 3] = "door3";
+})(keys || (keys = {}));
+console.log(typeof keys);
