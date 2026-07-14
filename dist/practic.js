@@ -105,6 +105,7 @@ console.log(newDate);
 const firstPromis = new Promise((resolve, reject) => {
     setTimeout(() => {
         const random = Math.random();
+        console.log(random);
         if (random > 0.5) {
             resolve("bebebe");
         }
@@ -113,5 +114,15 @@ const firstPromis = new Promise((resolve, reject) => {
         }
     }, 1500);
 });
+async function randomLol() {
+    try {
+        const result = await firstPromis;
+        console.log('Succes: ', result);
+    }
+    catch (error) {
+        console.error('Eror: ', error);
+    }
+}
+randomLol();
 // #20 !!!
 let elem = document.getElementById('butt');
