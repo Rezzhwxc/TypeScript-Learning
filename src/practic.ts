@@ -136,7 +136,7 @@ enum Months{
 	december,
 	JULY //
 }
-console.log(Months[4])
+console.log(Months[4]);
 
 let current: Months = Months.JULY
 console.log(current)
@@ -147,4 +147,23 @@ enum keys{
 	door2 = 2,
 	door3 = 3
 }
-console.log(keys[1])
+console.log(keys[1]);
+
+// #19
+let newDate: Date = new Date(2033, 11, 31);
+console.log(newDate)
+
+// #19.5
+const firstPromis: Promise<string> = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const random = Math.random();
+        if (random > 0.5) {
+            resolve("bebebe");
+        } else {
+            reject("nene");
+        }
+    }, 1500);
+});
+
+// #20 !!!
+let elem: HTMLElement = document.getElementById('butt') as HTMLElement;

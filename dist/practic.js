@@ -97,4 +97,21 @@ var keys;
     keys[keys["door2"] = 2] = "door2";
     keys[keys["door3"] = 3] = "door3";
 })(keys || (keys = {}));
-console.log(typeof keys);
+console.log(keys[1]);
+// #19
+let newDate = new Date(2033, 11, 31);
+console.log(newDate);
+// #19.5
+const firstPromis = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        const random = Math.random();
+        if (random > 0.5) {
+            resolve("bebebe");
+        }
+        else {
+            reject("nene");
+        }
+    }, 1500);
+});
+// #20 !!!
+let elem = document.getElementById('butt');
