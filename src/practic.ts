@@ -283,3 +283,12 @@ function Summ(...rest: number[]): number | undefined{
 	}
 }
 console.log(Summ(2, 3, 5, 7))
+
+// #26
+let func3 = function(num: number): number{
+	return num ** 2;
+}
+// та же функция под стрелкой
+let func4 = (num: number): number => num ** 2;
+
+console.log(func4(10))
