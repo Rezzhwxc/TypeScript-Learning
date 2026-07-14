@@ -126,3 +126,5 @@ async function randomLol() {
 randomLol();
 // #20 !!!
 let elem = document.getElementById('butt');
+let table = document.querySelector('ul');
+let list = document.querySelectorAll('li');

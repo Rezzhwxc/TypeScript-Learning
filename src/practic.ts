@@ -178,3 +178,11 @@ randomLol()
 
 // #20 !!!
 let elem: HTMLElement = document.getElementById('butt') as HTMLElement;
+
+let table: HTMLElement = document.querySelector('ul') as HTMLElement;
+let list: NodeList = document.querySelectorAll('li');
+
+// #21
+interface Employee{
+	
+}
