@@ -183,6 +183,103 @@ let table: HTMLElement = document.querySelector('ul') as HTMLElement;
 let list: NodeList = document.querySelectorAll('li');
 
 // #21
-interface Employee{
-	
+interface Named{ //общий базовый интерфейс
+	name: string;
 }
+interface Employee extends Named{
+	age?: number,
+	salary: number
+}
+interface WorkDays extends Named{
+	days: number[]
+}
+
+let worker: Employee & WorkDays = {
+	name: 'oluh',
+	age: 18,
+	salary: 1200000,
+
+	days: [1, 4, 5, 6]
+}
+
+// #22
+interface testPractic{
+	name: string,
+	time:{
+		start: string,
+		finish: string
+	}
+}
+interface testPractic2{
+	name: string,
+	positionJob: {
+		nameJob: string,
+		salary: number
+	}
+	adress: {
+		country: string,
+		city: string,
+		street: number | string
+	}
+}
+
+// #23
+enum COLORS{
+	RED,
+	BLUE,
+	GREEN,
+	YELLOW
+}
+
+interface Vocaloids{
+	name: string,
+	color: COLORS,
+	songs?: number
+}
+
+let vocaloids: Vocaloids[] = [
+	{
+		name: 'Miku', 
+		color: COLORS.BLUE, 
+		songs: 20
+	},
+	{
+		name: 'Rin',
+		color: COLORS.YELLOW
+	},
+	{
+		name: 'Teto',
+		color: COLORS.RED,
+		songs: 14
+	}
+]
+
+// #24
+function func(first: string, last?: string) {
+	if(last !== undefined){
+	return first + ' ' + last;
+	} else{
+		return first;
+	}
+}
+func('Yarek', 'Bebebe');
+
+function func2(first: string, last: string = "snow"){ //значение по умолчанию для last
+	console.log('Данные человека: ', first + ' ' + last);
+}
+func2('Johan');
+
+// #25
+function Summ(...rest: number[]): number | undefined{
+	let sum: number = 0;
+	if(rest.length !== 0){
+		for (let i = 0; i < rest.length; i++) {
+		sum += rest[i]
+		}
+		return sum;
+	}else{
+		console.log('Недостаточно символов для подсчета, итог:', sum)
+		return 0;
+	}
+}
+console.log(Summ(2, 3, 5, 7))

@@ -128,3 +128,62 @@ randomLol();
 let elem = document.getElementById('butt');
 let table = document.querySelector('ul');
 let list = document.querySelectorAll('li');
+let worker = {
+    name: 'oluh',
+    age: 18,
+    salary: 1200000,
+    days: [1, 4, 5, 6]
+};
+// #23
+var COLORS;
+(function (COLORS) {
+    COLORS[COLORS["RED"] = 0] = "RED";
+    COLORS[COLORS["BLUE"] = 1] = "BLUE";
+    COLORS[COLORS["GREEN"] = 2] = "GREEN";
+    COLORS[COLORS["YELLOW"] = 3] = "YELLOW";
+})(COLORS || (COLORS = {}));
+let vocaloids = [
+    {
+        name: 'Miku',
+        color: COLORS.BLUE,
+        songs: 20
+    },
+    {
+        name: 'Rin',
+        color: COLORS.YELLOW
+    },
+    {
+        name: 'Teto',
+        color: COLORS.RED,
+        songs: 14
+    }
+];
+// #24
+function func(first, last) {
+    if (last !== undefined) {
+        return first + ' ' + last;
+    }
+    else {
+        return first;
+    }
+}
+func('Yarek', 'Bebebe');
+function func2(first, last = "snow") {
+    console.log('Данные человека: ', first + ' ' + last);
+}
+func2('Johan');
+// #25
+function Summ(...rest) {
+    let sum = 0;
+    if (rest.length !== 0) {
+        for (let i = 0; i < rest.length; i++) {
+            sum += rest[i];
+        }
+        return sum;
+    }
+    else {
+        console.log('Недостаточно символов для подсчета, итог:', sum);
+        return 0;
+    }
+}
+console.log(Summ(2, 3, 5, 7));
