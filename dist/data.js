@@ -1,10 +1,20 @@
 "use strict";
-var VocaloidId;
-(function (VocaloidId) {
-    VocaloidId[VocaloidId["Miku"] = 1] = "Miku";
-    VocaloidId[VocaloidId["Teto"] = 2] = "Teto";
-    VocaloidId[VocaloidId["Duo"] = 3] = "Duo";
-})(VocaloidId || (VocaloidId = {}));
-// 
-console.log(VocaloidId[1]);
-console.log(VocaloidId.Miku);
+// enum VocaloidId{
+//     Miku = 1,
+//     Teto = 2,
+//     Duo = 3
+// }
+// interface VocaloidInfo{
+//     id: VocaloidId,
+//     name: string
+// }
+// interface TrackInfo{
+//     readonly id: number,
+//     title: string,
+//     audioPath: string,
+//     coverPath: string,
+//     vocaloidId: VocaloidId
+// }
+// // 
+// type TrackPreview = Omit<TrackInfo, 'audioPath' | 'vocaloidId'>
+// type TrackAudio = Pick<TrackInfo, 'audioPath'>
