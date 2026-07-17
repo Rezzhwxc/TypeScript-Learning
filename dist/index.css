@@ -4,12 +4,44 @@
     scrollbar-width: none;
 }
 
+@font-face{
+    font-family: 'Rimma-Sans';
+    src: url(/fonts/RIMMA_SANS-BOLD.TTF);
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 body{
     background: linear-gradient(60deg, black, rgb(51, 51, 51), black);
     min-height: 100vh;
 }
 
-#butt{
+.txt{
+    text-align: center;
+    margin: 40px;
+    padding: 0px 5px;
+    font-family: 'Rimma-Sans';
+    font-size: 45px;
+    letter-spacing: 3px;
+    user-select: none;
+    background: linear-gradient(50deg,
+    rgb(190, 186, 186) 0%,     /* Очень темный */
+    rgba(179, 176, 176, 0.9) 10%,    /* Ваш #1c1c1d */
+    rgba(129, 129, 129, 0.9) 40%,     /* Темно-серый */
+    rgba(143, 140, 140, 0.9) 60%,    /* Серый */
+    rgb(190, 186, 186) 0%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; 
+    animation: gradient 2.3s ease infinite;
+}
+
+/* #butt{
     position: absolute;
     left: 50%; bottom: 15%;
     transform: translate(-50%);
@@ -28,7 +60,7 @@ body{
 }
 #butt:active{
     font-size: 39px;
-}
+} */
 
 .board{
     justify-self: center;
@@ -48,10 +80,12 @@ body{
 }
 
 #createTask{
+    position: relative;
     margin: 200px auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
     border: 2px solid rgb(185, 185, 185);
     background-color: rgba(128, 128, 128, 0.281);
     border-radius: 20px;
@@ -62,18 +96,41 @@ body{
     user-select: none;
     transition: all 0.2s ease;
 }
+#createTask::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+#createTask:hover::after {
+    opacity: 1;
+}
 #createTask:hover{
     box-shadow: 0px 0px 7px rgb(199, 199, 199), inset 1px 1px 10px rgb(87, 87, 87);
     text-shadow: 0px 0px 7px rgb(199, 199, 199);
 }
+#createTask:active{
+    scale: 0.92;
+}
 
 .box{
     border: 3px solid rgb(155, 155, 155);
-    background: linear-gradient(120deg, rgba(253, 253, 253, 0.623), rgba(94, 100, 100, 0.527), rgb(36, 36, 36));
+    background: linear-gradient(120deg, rgba(253, 253, 253, 0.523), rgba(94, 100, 100, 0.527), rgb(36, 36, 36));
     border-radius: 40px;
     width: 230px; min-height: 330px;
     height: fit-content;
-    padding: 5px 5px 20px 5px;
+    padding: 5px;
     transition: all 0.2s ease;
 }
 .box:hover{
@@ -133,14 +190,21 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgba(116, 116, 116, 0.747);
     border: none;
+    user-select: none;
     cursor: pointer;
     transition: all 0.2s ease-out;
 }
-#complete:hover,
+#redakt{
+    background-color: rgba(66, 66, 66, 0.89);
+    color: rgba(156, 156, 156, 0.89);
+}
 #redakt:hover{
+    background-color: rgba(85, 85, 85, 0.89);
+}
+#complete:hover{
     background-color: rgba(175, 175, 175, 0.747);
 }
 #complete:active,
 #redakt:active{
-    scale: 0.95;
+    scale: 0.92;
 }
