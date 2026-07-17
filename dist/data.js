@@ -15,6 +15,16 @@
 //     coverPath: string,
 //     vocaloidId: VocaloidId
 // }
-// // 
-// type TrackPreview = Omit<TrackInfo, 'audioPath' | 'vocaloidId'>
-// type TrackAudio = Pick<TrackInfo, 'audioPath'>
+//Tech elements
+const countTask = 0;
+// HTML elements
+const createButton = document.getElementById('createTask');
+// 
+if (countTask == 0) {
+    createButton.style = 'display: flex';
+}
+else {
+    createButton.style = 'display: none';
+}
+function createTask() {
+}

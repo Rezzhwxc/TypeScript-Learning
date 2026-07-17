@@ -31,3 +31,21 @@ interface Task {
     createdAt: number,
     editedAt: number
 }
+
+//Tech elements
+const countTask: number = 0;
+
+
+// HTML elements
+const createButton: HTMLElement = document.getElementById('createTask') as HTMLElement;
+
+// 
+if(countTask == 0){
+    createButton.style = 'display: flex';
+}else{
+    createButton.style = 'display: none';
+}
+
+function createTask(){
+    
+}

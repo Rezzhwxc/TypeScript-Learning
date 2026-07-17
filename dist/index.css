@@ -82,7 +82,7 @@ body{
 #createTask{
     position: relative;
     margin: 200px auto;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     outline: none;
@@ -207,4 +207,27 @@ body{
 #complete:active,
 #redakt:active{
     scale: 0.92;
+}
+
+/* // */
+
+.inputBox{
+    border: 2px solid rgb(136, 136, 136);
+    border-radius: 40px;
+    box-shadow: 0px 0px 7px rgb(199, 199, 199), inset 1px 1px 10px rgb(87, 87, 87);
+    padding: 20px;
+    z-index: 1000;
+    position: absolute;
+    left: 50%; top: 30%;
+    transform: translate(-50%);
+    width: 30%; height: 30%;
+    background-color: #333;
+}
+.inputBox h1{
+    text-align: center;
+    font-size: 35px;
+    color: rgba(136, 136, 136, 0.897);
+    text-shadow: 2px 2px 0px black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    user-select: none;
 }
