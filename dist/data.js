@@ -87,14 +87,36 @@ document.addEventListener('click', (e) => {
         return;
     hideModal();
 });
+let errorTimeout = null;
 taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(taskForm);
     const title = String(formData.get('titleTask') ?? '').trim();
+    const titleInput = taskForm.querySelector('input[name="titleTask"]');
     const status = formData.get('activeTask');
     const level = formData.get('levelTask');
-    if (!title)
+    if (!title) {
+        // Очистить предыдущий таймер
+        if (errorTimeout) {
+            clearTimeout(errorTimeout);
+            errorTimeout = null;
+        }
+        titleInput.style.border = '1px solid rgb(194, 63, 63)';
+        titleInput.placeholder = 'Введите название задачи!';
+        errorTimeout = setTimeout(() => {
+            titleInput.style.border = '';
+            titleInput.placeholder = 'Название задачи';
+            errorTimeout = null;
+        }, 2000);
         return;
+    }
+    // Если есть ошибка, сбросить стили при успешной отправке
+    if (errorTimeout) {
+        clearTimeout(errorTimeout);
+        errorTimeout = null;
+        titleInput.style.border = '';
+        titleInput.placeholder = 'Название задачи';
+    }
     const now = Date.now();
     const newTask = {
         id: crypto.randomUUID(),
