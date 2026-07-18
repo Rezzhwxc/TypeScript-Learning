@@ -20,6 +20,8 @@ const countTask = 0;
 const now = Date.now();
 // HTML elements
 const createButton = document.getElementById('createTask');
+const confirmModal = document.getElementById('conf');
+const backModal = document.getElementById('cancelBtn');
 // 
 if (countTask == 0) {
     createButton.style = 'display: flex';
@@ -27,12 +29,21 @@ if (countTask == 0) {
 else {
     createButton.style = 'display: none';
 }
-function createTask() {
-    console.log('alelelelele');
+function showModal() {
     const createTaskModal = document.getElementById('inputBox');
-    createTaskModal.style.display = 'block';
     requestAnimationFrame(() => {
         createTaskModal.classList.add('inputboxActive');
     });
 }
-createButton.addEventListener('click', createTask);
+// function hideModal(): void{
+//     const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
+//     requestAnimationFrame(() => {
+//     createTaskModal.classList.remove('inputboxActive');
+//         createTaskModal.classList.add('inputboxInactive');
+//         createTaskModal.style.display = 'block';
+//     })
+// }
+// //
+createButton.addEventListener('click', showModal);
+// confirmModal.addEventListener('click', hideModal);
+// backModal.addEventListener('click', hideModal);

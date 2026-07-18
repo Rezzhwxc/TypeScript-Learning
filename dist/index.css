@@ -25,6 +25,16 @@
         transform: translate(-50%, 0);
     }
 }
+@keyframes hideModal {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    100%{
+        opacity: 0;
+        transform: translate(-50%, 120px);
+    }
+}
 
 body{
     background: linear-gradient(60deg, black, rgb(51, 51, 51), black);
@@ -223,7 +233,6 @@ body{
 /* // */
 
 #inputBox{
-
     border: 2px solid rgb(136, 136, 136);
     border-radius: 40px;
     box-shadow: 0px 0px 7px rgb(199, 199, 199), inset 1px 1px 10px rgb(87, 87, 87);
@@ -234,9 +243,12 @@ body{
     width: 26%; height: fit-content;
     background-color: #333;
 }
-#inputboxActive{
+.inputboxActive{
     display: block;
-    animation: showModal 0.5s ease forwards;
+    animation: showModal 0.3s ease forwards;
+}
+.inputboxInactive{
+    animation: hideModal 0.3s ease forwards;
 }
 #inputBox h1{
     text-align: center;

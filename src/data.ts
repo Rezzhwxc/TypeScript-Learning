@@ -41,20 +41,35 @@ const now = Date.now();
 // HTML elements
 const createButton: HTMLElement = document.getElementById('createTask') as HTMLElement;
 
-
+const confirmModal: HTMLElement = document.getElementById('conf') as HTMLElement;
+const backModal: HTMLElement = document.getElementById('cancelBtn') as HTMLElement;
 // 
 if(countTask == 0){
     createButton.style = 'display: flex';
 }else{
-    createButton.style = 'display: none';
-}
+    createButton.style = 'display: none';}
 
-function createTask(): void{
+
+function showModal(): void{
     const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
-
     requestAnimationFrame(() => {
     createTaskModal.classList.add('inputboxActive');
     })
 }
 
-createButton.addEventListener('click', createTask);
+function hideModal(): void{
+    const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
+    requestAnimationFrame(() => {
+    createTaskModal.classList.remove('inputboxActive');
+        createTaskModal.classList.add('inputboxInactive');
+
+        createTaskModal.style.display = 'block';
+    })
+}
+
+// //
+
+createButton.addEventListener('click', showModal);
+
+confirmModal.addEventListener('click', hideModal);
+backModal.addEventListener('click', hideModal);
