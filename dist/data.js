@@ -15,14 +15,14 @@
 //     coverPath: string,
 //     vocaloidId: VocaloidId
 // }
-//Tech elements
+//DOM elements
 const tasks = [];
 const createButton = document.getElementById('createTask');
 const taskForm = document.getElementById('taskForm');
 const inputBox = document.getElementById('inputBox');
 const cancelBtn = document.getElementById('cancelBtn');
 const taskList = document.getElementById('board');
-// 
+// func
 function updateCreateButton() {
     createButton.style.display = tasks.length === 0 ? 'flex' : 'none';
 }
@@ -74,8 +74,19 @@ function renderTask(task) {
   `;
     taskList.appendChild(box);
 }
-createButton.addEventListener('click', showModal);
+createButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showModal();
+});
 cancelBtn.addEventListener('click', hideModal);
+document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (inputBox.style.display === 'none')
+        return;
+    if (inputBox.contains(target))
+        return;
+    hideModal();
+});
 taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(taskForm);

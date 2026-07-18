@@ -27,7 +27,7 @@ interface Task {
     editedAt: number;
 }
 
-//Tech elements
+//DOM elements
 const tasks: Task[] = [];
 
 const createButton = document.getElementById('createTask') as HTMLButtonElement;
@@ -36,7 +36,7 @@ const inputBox = document.getElementById('inputBox') as HTMLDivElement;
 const cancelBtn = document.getElementById('cancelBtn') as HTMLButtonElement;
 const taskList = document.getElementById('board') as HTMLDivElement;
 
-// 
+// func
 
 function updateCreateButton(): void {
   createButton.style.display = tasks.length === 0 ? 'flex' : 'none';
@@ -100,8 +100,18 @@ function renderTask(task: Task): void {
   taskList.appendChild(box);
 }
 
-createButton.addEventListener('click', showModal);
+createButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showModal();
+});
 cancelBtn.addEventListener('click', hideModal);
+
+document.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  if (inputBox.style.display === 'none') return;
+  if (inputBox.contains(target)) return;
+  hideModal();
+});
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
