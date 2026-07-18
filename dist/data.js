@@ -17,6 +17,7 @@
 // }
 //Tech elements
 const countTask = 0;
+const now = Date.now();
 // HTML elements
 const createButton = document.getElementById('createTask');
 // 
@@ -27,4 +28,11 @@ else {
     createButton.style = 'display: none';
 }
 function createTask() {
+    console.log('alelelelele');
+    const createTaskModal = document.getElementById('inputBox');
+    createTaskModal.style.display = 'block';
+    requestAnimationFrame(() => {
+        createTaskModal.classList.add('inputboxActive');
+    });
 }
+createButton.addEventListener('click', createTask);

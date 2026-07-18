@@ -35,9 +35,12 @@ interface Task {
 //Tech elements
 const countTask: number = 0;
 
+const now = Date.now();
+
 
 // HTML elements
 const createButton: HTMLElement = document.getElementById('createTask') as HTMLElement;
+
 
 // 
 if(countTask == 0){
@@ -46,6 +49,12 @@ if(countTask == 0){
     createButton.style = 'display: none';
 }
 
-function createTask(){
-    
+function createTask(): void{
+    const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
+
+    requestAnimationFrame(() => {
+    createTaskModal.classList.add('inputboxActive');
+    })
 }
+
+createButton.addEventListener('click', createTask);

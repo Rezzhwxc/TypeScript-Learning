@@ -58,9 +58,24 @@
             </div>
         </div> -->
     </section>
+    
 
-    <div class="inputBox">
+    <div id="inputBox" style="display: none;">
         <h1>Create Task</h1>
+        <form id="taskForm" method="dialog">
+            <input name="titleTask" type="text" placeholder="Название задачи"/>
+            <select name="activeTask" id="selectActive">
+                <option value="active">Активное</option>
+                <option value="done">Неактивное</option>
+            </select>
+            <select name="levelTask" id="selectLevel">
+                <option value="low">Легкая</option>
+                <option value="medium">Средняя</option>
+                <option value="high">Высокая</option>
+            </select>
+            <button type="submitTask" id="conf">Сохранить</button>
+            <button type="buttonTask" id="cancelBtn">Отмена</button>
+        </form>
     </div>
     
     <!-- <script src="main.js"></script> -->
