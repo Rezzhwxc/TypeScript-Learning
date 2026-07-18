@@ -39,7 +39,14 @@ const taskList = document.getElementById('board') as HTMLDivElement;
 // func
 
 function updateCreateButton(): void {
-  createButton.style.display = tasks.length === 0 ? 'flex' : 'none';
+  if (tasks.length === 0) {
+    createButton.classList.add('centered');
+    createButton.classList.remove('floating');
+  } else {
+    createButton.classList.remove('centered');
+    createButton.classList.add('floating');
+  }
+  createButton.style.display = 'flex';
 }
 
 function showModal(): void {
@@ -47,6 +54,11 @@ function showModal(): void {
   inputBox.classList.remove('inputboxInactive');
   requestAnimationFrame(() => {
     inputBox.classList.add('inputboxActive');
+    
+    const titleInput = taskForm.querySelector('input[name="titleTask"]') as HTMLInputElement;
+    if (titleInput) {
+      titleInput.focus();
+    }
   });
 }
 

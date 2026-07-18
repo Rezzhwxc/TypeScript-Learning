@@ -84,13 +84,14 @@ body{
 } */
 
 #board{
+    position: relative;
     justify-self: center;
     margin: 50px 20px;
     background-color: rgb(39, 39, 39);
 
     display: grid;
     justify-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding: 30px;
     gap: 50px;
     width: 60%;
@@ -102,8 +103,8 @@ body{
 }
 
 #createTask{
-    position: relative;
-    margin: 200px auto;
+    position: absolute;
+    
     display: none;
     align-items: center;
     justify-content: center;
@@ -118,6 +119,20 @@ body{
     user-select: none;
     transition: all 0.2s ease;
 }
+#createTask.centered{
+    top: 43%; left: 50%;
+    transform: translate(-50%);
+}
+#createTask.floating{
+    width: 90px;
+    height: 90px;
+    font-size: 55px;
+    position: fixed;
+    top: 60px;
+    left: 60px;
+    transform: none;
+}
+
 #createTask::after {
     content: attr(data-tooltip);
     position: absolute;

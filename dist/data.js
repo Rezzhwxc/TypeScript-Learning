@@ -24,13 +24,26 @@ const cancelBtn = document.getElementById('cancelBtn');
 const taskList = document.getElementById('board');
 // func
 function updateCreateButton() {
-    createButton.style.display = tasks.length === 0 ? 'flex' : 'none';
+    if (tasks.length === 0) {
+        createButton.classList.add('centered');
+        createButton.classList.remove('floating');
+    }
+    else {
+        createButton.classList.remove('centered');
+        createButton.classList.add('floating');
+    }
+    createButton.style.display = 'flex';
 }
 function showModal() {
     inputBox.style.display = 'block';
     inputBox.classList.remove('inputboxInactive');
     requestAnimationFrame(() => {
         inputBox.classList.add('inputboxActive');
+        // Фокусируем поле ввода после появления модалки
+        const titleInput = taskForm.querySelector('input[name="titleTask"]');
+        if (titleInput) {
+            titleInput.focus();
+        }
     });
 }
 function hideModal() {
