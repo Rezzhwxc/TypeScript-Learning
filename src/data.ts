@@ -15,61 +15,121 @@
 //     vocaloidId: VocaloidId
 // }
 
-// // 
-
-// type TrackPreview = Omit<TrackInfo, 'audioPath' | 'vocaloidId'>
-// type TrackAudio = Pick<TrackInfo, 'audioPath'>
-
 type TaskStatus = 'active' | 'done';
 type TaskLevel = 'low' | 'medium' | 'high';
 
 interface Task {
-    id: number,
-    title: string,
-    status: TaskStatus,
-    level: TaskLevel,
-    createdAt: number,
-    editedAt: number
+    id: string;
+    title: string;
+    status: TaskStatus;
+    level: TaskLevel;
+    createdAt: number;
+    editedAt: number;
 }
 
 //Tech elements
-const countTask: number = 0;
+const tasks: Task[] = [];
 
-const now = Date.now();
+const createButton = document.getElementById('createTask') as HTMLButtonElement;
+const taskForm = document.getElementById('taskForm') as HTMLFormElement;
+const inputBox = document.getElementById('inputBox') as HTMLDivElement;
+const cancelBtn = document.getElementById('cancelBtn') as HTMLButtonElement;
+const taskList = document.getElementById('board') as HTMLDivElement;
 
-
-// HTML elements
-const createButton: HTMLElement = document.getElementById('createTask') as HTMLElement;
-
-const confirmModal: HTMLElement = document.getElementById('conf') as HTMLElement;
-const backModal: HTMLElement = document.getElementById('cancelBtn') as HTMLElement;
 // 
-if(countTask == 0){
-    createButton.style = 'display: flex';
-}else{
-    createButton.style = 'display: none';}
 
-
-function showModal(): void{
-    const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
-    requestAnimationFrame(() => {
-    createTaskModal.classList.add('inputboxActive');
-    })
+function updateCreateButton(): void {
+  createButton.style.display = tasks.length === 0 ? 'flex' : 'none';
 }
 
-function hideModal(): void{
-    const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
-    requestAnimationFrame(() => {
-    createTaskModal.classList.remove('inputboxActive');
-        createTaskModal.classList.add('inputboxInactive');
-
-        createTaskModal.style.display = 'block';
-    })
+function showModal(): void {
+  inputBox.style.display = 'block';
+  inputBox.classList.remove('inputboxInactive');
+  requestAnimationFrame(() => {
+    inputBox.classList.add('inputboxActive');
+  });
 }
 
-// //
+function hideModal(): void {
+  inputBox.classList.remove('inputboxActive');
+  inputBox.classList.add('inputboxInactive');
+
+  function onAnimationEnd() {
+    inputBox.style.display = 'none';
+    inputBox.classList.remove('inputboxInactive');
+    inputBox.removeEventListener('animationend', onAnimationEnd);
+  }
+
+  inputBox.addEventListener('animationend', onAnimationEnd);
+}
+
+function levelToText(level: TaskLevel): string {
+  switch (level) {
+    case 'low':
+      return 'Легкая';
+    case 'medium':
+      return 'Средняя';
+    case 'high':
+      return 'Высокая';
+  }
+}
+
+function renderTask(task: Task): void {
+  const box = document.createElement('div');
+  box.className = 'box';
+
+  const editedText =
+    task.createdAt === task.editedAt
+      ? 'Изменений не было'
+      : `Изменено: ${new Date(task.editedAt).toLocaleString()}`;
+
+  box.innerHTML = `
+    <h1 class="zadacha">${task.title}</h1>
+    <h1 id="active" class="${task.status === 'active' ? 'trueActive' : 'falseActive'}">
+      ${task.status === 'active' ? 'Активное' : 'Неактивное'}
+    </h1>
+    <p class="level">Сложность - ${levelToText(task.level)}</p>
+    <p class="createdAt">Создано: ${new Date(task.createdAt).toLocaleString()}</p>
+    <p class="editedAt">${editedText}</p>
+    <div class="boxButt">
+      <button class="complete" type="button">Готово</button>
+      <button class="redakt" type="button">Редактировать</button>
+    </div>
+  `;
+
+  taskList.appendChild(box);
+}
 
 createButton.addEventListener('click', showModal);
+cancelBtn.addEventListener('click', hideModal);
 
-confirmModal.addEventListener('click', hideModal);
-backModal.addEventListener('click', hideModal);
+taskForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(taskForm);
+
+  const title = String(formData.get('titleTask') ?? '').trim();
+  const status = formData.get('activeTask') as TaskStatus;
+  const level = formData.get('levelTask') as TaskLevel;
+
+  if (!title) return;
+
+  const now = Date.now();
+
+  const newTask: Task = {
+    id: crypto.randomUUID(),
+    title,
+    status,
+    level,
+    createdAt: now,
+    editedAt: now,
+  };
+
+  tasks.push(newTask);
+  renderTask(newTask);
+  updateCreateButton();
+  taskForm.reset();
+  hideModal();
+});
+
+updateCreateButton();

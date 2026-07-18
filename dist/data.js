@@ -16,34 +16,87 @@
 //     vocaloidId: VocaloidId
 // }
 //Tech elements
-const countTask = 0;
-const now = Date.now();
-// HTML elements
+const tasks = [];
 const createButton = document.getElementById('createTask');
-const confirmModal = document.getElementById('conf');
-const backModal = document.getElementById('cancelBtn');
+const taskForm = document.getElementById('taskForm');
+const inputBox = document.getElementById('inputBox');
+const cancelBtn = document.getElementById('cancelBtn');
+const taskList = document.getElementById('board');
 // 
-if (countTask == 0) {
-    createButton.style = 'display: flex';
-}
-else {
-    createButton.style = 'display: none';
+function updateCreateButton() {
+    createButton.style.display = tasks.length === 0 ? 'flex' : 'none';
 }
 function showModal() {
-    const createTaskModal = document.getElementById('inputBox');
+    inputBox.style.display = 'block';
+    inputBox.classList.remove('inputboxInactive');
     requestAnimationFrame(() => {
-        createTaskModal.classList.add('inputboxActive');
+        inputBox.classList.add('inputboxActive');
     });
 }
-// function hideModal(): void{
-//     const createTaskModal: HTMLElement = document.getElementById('inputBox') as HTMLElement;
-//     requestAnimationFrame(() => {
-//     createTaskModal.classList.remove('inputboxActive');
-//         createTaskModal.classList.add('inputboxInactive');
-//         createTaskModal.style.display = 'block';
-//     })
-// }
-// //
+function hideModal() {
+    inputBox.classList.remove('inputboxActive');
+    inputBox.classList.add('inputboxInactive');
+    function onAnimationEnd() {
+        inputBox.style.display = 'none';
+        inputBox.classList.remove('inputboxInactive');
+        inputBox.removeEventListener('animationend', onAnimationEnd);
+    }
+    inputBox.addEventListener('animationend', onAnimationEnd);
+}
+function levelToText(level) {
+    switch (level) {
+        case 'low':
+            return 'Легкая';
+        case 'medium':
+            return 'Средняя';
+        case 'high':
+            return 'Высокая';
+    }
+}
+function renderTask(task) {
+    const box = document.createElement('div');
+    box.className = 'box';
+    const editedText = task.createdAt === task.editedAt
+        ? 'Изменений не было'
+        : `Изменено: ${new Date(task.editedAt).toLocaleString()}`;
+    box.innerHTML = `
+    <h1 class="zadacha">${task.title}</h1>
+    <h1 id="active" class="${task.status === 'active' ? 'trueActive' : 'falseActive'}">
+      ${task.status === 'active' ? 'Активное' : 'Неактивное'}
+    </h1>
+    <p class="level">Сложность - ${levelToText(task.level)}</p>
+    <p class="createdAt">Создано: ${new Date(task.createdAt).toLocaleString()}</p>
+    <p class="editedAt">${editedText}</p>
+    <div class="boxButt">
+      <button class="complete" type="button">Готово</button>
+      <button class="redakt" type="button">Редактировать</button>
+    </div>
+  `;
+    taskList.appendChild(box);
+}
 createButton.addEventListener('click', showModal);
-// confirmModal.addEventListener('click', hideModal);
-// backModal.addEventListener('click', hideModal);
+cancelBtn.addEventListener('click', hideModal);
+taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(taskForm);
+    const title = String(formData.get('titleTask') ?? '').trim();
+    const status = formData.get('activeTask');
+    const level = formData.get('levelTask');
+    if (!title)
+        return;
+    const now = Date.now();
+    const newTask = {
+        id: crypto.randomUUID(),
+        title,
+        status,
+        level,
+        createdAt: now,
+        editedAt: now,
+    };
+    tasks.push(newTask);
+    renderTask(newTask);
+    updateCreateButton();
+    taskForm.reset();
+    hideModal();
+});
+updateCreateButton();

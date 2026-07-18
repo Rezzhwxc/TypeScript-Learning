@@ -83,7 +83,7 @@ body{
     font-size: 39px;
 } */
 
-.board{
+#board{
     justify-self: center;
     margin: 50px 20px;
     background-color: rgb(39, 39, 39);
@@ -159,7 +159,7 @@ body{
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.705);
 }
 
-.box #zadacha{
+.box .zadacha{
     text-align: center;
     margin: 5px;
     padding: 0px 5px;
@@ -184,9 +184,9 @@ body{
     color: rgb(224, 82, 82);
 }
 
-#level,
-#createdAt,
-#editedAt
+.level,
+.createdAt,
+.editedAt
 {
     user-select: none;
     color: rgba(20, 20, 20, 0.75);
@@ -195,13 +195,13 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-#boxButt{
+.boxButt{
     display: flex;
     flex-direction: column;
 }
 
-#complete,
-#redakt{
+.complete,
+.redakt{
     width: 180px;
     padding: 6px 0px;
     margin: 8px auto;
@@ -215,18 +215,18 @@ body{
     cursor: pointer;
     transition: all 0.2s ease-out;
 }
-#redakt{
+.redakt{
     background-color: rgba(66, 66, 66, 0.89);
     color: rgba(156, 156, 156, 0.89);
 }
-#redakt:hover{
+.redakt:hover{
     background-color: rgba(85, 85, 85, 0.89);
 }
-#complete:hover{
+.complete:hover{
     background-color: rgba(175, 175, 175, 0.747);
 }
-#complete:active,
-#redakt:active{
+.complete:active,
+.redakt:active{
     scale: 0.92;
 }
 
@@ -310,7 +310,6 @@ body{
 }
 #taskForm select:hover{
     box-shadow: 0px 0px 5px whitesmoke;
-    scale: 1.05;
 }
 
 #taskForm option{
