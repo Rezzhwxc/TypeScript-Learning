@@ -39,7 +39,6 @@ function showModal() {
     inputBox.classList.remove('inputboxInactive');
     requestAnimationFrame(() => {
         inputBox.classList.add('inputboxActive');
-        // Фокусируем поле ввода после появления модалки
         const titleInput = taskForm.querySelector('input[name="titleTask"]');
         if (titleInput) {
             titleInput.focus();
@@ -66,13 +65,15 @@ function levelToText(level) {
             return 'Высокая';
     }
 }
-function renderTask(task) {
+function createTaskElement(task) {
     const box = document.createElement('div');
     box.className = 'box';
+    box.dataset.taskId = task.id;
     const editedText = task.createdAt === task.editedAt
         ? 'Изменений не было'
         : `Изменено: ${new Date(task.editedAt).toLocaleString()}`;
     box.innerHTML = `
+    <button class="delete-btn" data-tooltip="Delete a task" type="button"><img src="/img/delete.png" alt="Delete"></button>
     <h1 class="zadacha">${task.title}</h1>
     <h1 id="active" class="${task.status === 'active' ? 'trueActive' : 'falseActive'}">
       ${task.status === 'active' ? 'Активное' : 'Неактивное'}
@@ -85,6 +86,30 @@ function renderTask(task) {
       <button class="redakt" type="button">Редактировать</button>
     </div>
   `;
+    return box;
+}
+function renderEditForm(task) {
+    const statusOptions = `
+    <option value="active" ${task.status === 'active' ? 'selected' : ''}>Активное</option>
+    <option value="done" ${task.status === 'done' ? 'selected' : ''}>Неактивное</option>
+  `;
+    const levelOptions = `
+    <option value="low" ${task.level === 'low' ? 'selected' : ''}>Легкая</option>
+    <option value="medium" ${task.level === 'medium' ? 'selected' : ''}>Средняя</option>
+    <option value="high" ${task.level === 'high' ? 'selected' : ''}>Высокая</option>
+  `;
+    return `
+    <div class="edit-form">
+      <h1>Edit a task</h1>
+      <input type="text" class="edit-title" placeholder="Название задачи" value="${task.title}" />
+      <select class="edit-status">${statusOptions}</select>
+      <select class="edit-level">${levelOptions}</select>
+      <button class="redakt save-btn" type="button">Сохранить</button>
+    </div>
+  `;
+}
+function renderTask(task) {
+    const box = createTaskElement(task);
     taskList.appendChild(box);
 }
 createButton.addEventListener('click', (e) => {
@@ -109,7 +134,6 @@ taskForm.addEventListener('submit', (e) => {
     const status = formData.get('activeTask');
     const level = formData.get('levelTask');
     if (!title) {
-        // Очистить предыдущий таймер
         if (errorTimeout) {
             clearTimeout(errorTimeout);
             errorTimeout = null;
@@ -123,7 +147,6 @@ taskForm.addEventListener('submit', (e) => {
         }, 2000);
         return;
     }
-    // Если есть ошибка, сбросить стили при успешной отправке
     if (errorTimeout) {
         clearTimeout(errorTimeout);
         errorTimeout = null;
@@ -144,5 +167,72 @@ taskForm.addEventListener('submit', (e) => {
     updateCreateButton();
     taskForm.reset();
     hideModal();
+});
+// button "Ready"
+taskList.addEventListener('click', (e) => {
+    const target = e.target;
+    const completeBtn = target.closest('.complete');
+    if (!completeBtn)
+        return;
+    const box = completeBtn.closest('.box');
+    if (!box)
+        return;
+    box.classList.add('completed');
+    setTimeout(() => {
+        const taskId = box.dataset.taskId;
+        if (taskId) {
+            const index = tasks.findIndex(t => t.id === taskId);
+            if (index !== -1) {
+                tasks.splice(index, 1);
+            }
+        }
+        box.remove();
+        updateCreateButton();
+    }, 400);
+});
+taskList.addEventListener('click', (e) => {
+    const target = e.target;
+    const redaktBtn = target.closest('.redakt');
+    if (!redaktBtn)
+        return;
+    const box = redaktBtn.closest('.box');
+    if (!box)
+        return;
+    const taskId = box.dataset.taskId;
+    if (!taskId)
+        return;
+    const task = tasks.find(t => t.id === taskId);
+    if (!task)
+        return;
+    if (box.classList.contains('editing')) {
+        const titleInput = box.querySelector('.edit-title');
+        const statusSelect = box.querySelector('.edit-status');
+        const levelSelect = box.querySelector('.edit-level');
+        const newTitle = titleInput.value.trim();
+        if (!newTitle) {
+            titleInput.style.border = '1px solid rgb(182, 72, 72)';
+            setTimeout(() => titleInput.style.border = '', 1500);
+            return;
+        }
+        task.title = newTitle;
+        task.status = statusSelect.value;
+        task.level = levelSelect.value;
+        task.editedAt = Date.now();
+        box.classList.remove('editing');
+        const newBox = createTaskElement(task);
+        box.replaceWith(newBox);
+        newBox.classList.add('edited-flash');
+        setTimeout(() => {
+            newBox.classList.remove('edited-flash');
+        }, 1200);
+        updateCreateButton();
+    }
+    else {
+        box.classList.add('editing');
+        box.innerHTML = renderEditForm(task);
+        const titleInput = box.querySelector('.edit-title');
+        if (titleInput)
+            titleInput.focus();
+    }
 });
 updateCreateButton();

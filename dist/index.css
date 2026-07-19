@@ -39,6 +39,7 @@
 body{
     background: linear-gradient(60deg, black, rgb(51, 51, 51), black);
     min-height: 100vh;
+    overflow-y: hidden;
 }
 
 .txt{
@@ -91,12 +92,12 @@ body{
 
     display: grid;
     justify-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     padding: 30px;
     gap: 50px;
-    width: 60%;
-    min-height: 500px;
-    height: fit-content;
+    width: 80%;
+    min-height: 400px; max-height: 72vh;
+    overflow-y: auto;
     border: 2px solid rgb(185, 185, 185);
     box-shadow: 0px 0px 10px rgb(199, 199, 199), inset 1px 1px 10px rgb(87, 87, 87);
     border-radius: 30px;
@@ -120,7 +121,7 @@ body{
     transition: all 0.2s ease;
 }
 #createTask.centered{
-    top: 43%; left: 50%;
+    top: 40%; left: 50%;
     transform: translate(-50%);
 }
 #createTask.floating{
@@ -128,8 +129,8 @@ body{
     height: 90px;
     font-size: 55px;
     position: fixed;
-    top: 60px;
-    left: 60px;
+    top: 50px;
+    left: 50px;
     transform: none;
 }
 
@@ -162,7 +163,8 @@ body{
 }
 
 .box{
-    border: 3px solid rgb(155, 155, 155);
+    position: relative;
+    border: 2px solid rgb(155, 155, 155);
     background: linear-gradient(120deg, rgba(175, 175, 175, 0.523), rgba(94, 100, 100, 0.527), rgb(36, 36, 36));
     border-radius: 50px;
     width: 280px; min-height: 330px;
@@ -173,6 +175,53 @@ body{
 .box:hover{
     scale: 1.05;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.705);
+}
+.box.completed {
+  border: 2px solid rgba(104, 218, 104, 0.8) !important;
+  box-shadow: 0px 0px 20px 5px rgba(104, 218, 104) !important;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+.box .delete-btn{
+    filter: contrast(70%);
+    cursor: pointer;
+    position: absolute;
+    right: 11px; top: 11px;
+    width: 50px; height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(85, 85, 85, 0.37);
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+.box .delete-btn:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.box .delete-btn:hover::after {
+    opacity: 1;
+}
+
+.box .delete-btn:hover{
+    border: 2px solid rgb(221, 33, 33);
+}
+.box .delete-btn:active{
+    scale: 0.9;
 }
 
 .box .zadacha{
@@ -204,8 +253,9 @@ body{
 .createdAt,
 .editedAt
 {
+    text-align: center;
     user-select: none;
-    color: rgba(20, 20, 20, 0.75);
+    color: rgba(20, 20, 20, 0.85);
     margin: 10px; margin-bottom: 20px;
     font-size: 20px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -383,4 +433,105 @@ body{
 #cancelBtn:active,
 #conf:active{
     scale: 0.9;
+}
+
+/* editing task */
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 330px;
+    height: fit-content;
+    gap: 16px;
+    padding: 10px 5px;
+}
+.edit-form h1{
+    text-align: center;
+    font-size: 35px;
+    color: rgba(173, 173, 173, 0.897);
+    text-shadow: 2px 2px 0px black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    user-select: none;
+}
+.edit-form input{
+    text-align: center;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #9e9e9e;
+    outline: none;
+    user-select: none;
+    margin: 10px;
+    width: 80%;
+    height: fit-content;
+    padding: 10px 6px;
+    background-color: #25252593;
+    border-radius: 20px;
+    border: 1px solid #929292;
+    transition: all 0.2s ease;
+}
+.edit-form input:hover,
+.edit-form input:focus{
+    box-shadow: 0px 0px 5px whitesmoke;
+    scale: 1.03;
+}
+
+.edit-form select {
+    width: 70%;
+    text-align: center;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #9e9e9e;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    background-color: #2525258a;
+    border-radius: 20px;
+    padding: 9px 5px;
+    border: none;
+    transition: all 0.2s ease;
+}
+.edit-form select:hover{
+    box-shadow: 0px 0px 5px whitesmoke;
+}
+.edit-form option{
+    text-align: center;
+    font-size: 17px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #b1b1b1;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    background-color: #2525259c;
+    border-radius: 20px;
+    padding: 8px 5px;
+}
+
+.edit-form .save-btn {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #cccccc;
+    background-color: #252525dc;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    width: 80%;
+    height: fit-content;
+    padding: 10px 6px;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.3s ease;
+}
+.edit-form .save-btn:hover {
+  background-color: rgba(104, 218, 104, 0.801);
+    color: #3a3a3a;
+    width: 85%;
+}
+
+.box.edited-flash {
+  border: 2px solid #4caf50;
+  box-shadow: 0 0 15px #4caf50;
+  transition: all 0.2s ease;
 }
