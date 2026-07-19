@@ -227,6 +227,9 @@ taskList.addEventListener('click', (e) => {
   }, 400);
 });
 
+
+// button "Edit"
+
 taskList.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;
   const redaktBtn = target.closest('.redakt');
@@ -278,6 +281,31 @@ taskList.addEventListener('click', (e) => {
     const titleInput = box.querySelector('.edit-title') as HTMLInputElement;
     if (titleInput) titleInput.focus();
   }
+});
+
+// button "Delete"
+
+taskList.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  const deleteBtn = target.closest('.delete-btn');
+  if (!deleteBtn) return;
+
+  const box = deleteBtn.closest('.box') as HTMLDivElement;
+  if (!box) return;
+
+  box.classList.add('deleting');
+
+  setTimeout(() => {
+    const taskId = box.dataset.taskId;
+    if (taskId) {
+      const index = tasks.findIndex(t => t.id === taskId);
+      if (index !== -1) {
+        tasks.splice(index, 1);
+      }
+    }
+    box.remove();
+    updateCreateButton();
+  }, 400);
 });
 
 updateCreateButton();

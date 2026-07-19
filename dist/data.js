@@ -190,6 +190,7 @@ taskList.addEventListener('click', (e) => {
         updateCreateButton();
     }, 400);
 });
+// button "Edit"
 taskList.addEventListener('click', (e) => {
     const target = e.target;
     const redaktBtn = target.closest('.redakt');
@@ -234,5 +235,27 @@ taskList.addEventListener('click', (e) => {
         if (titleInput)
             titleInput.focus();
     }
+});
+// button "Delete"
+taskList.addEventListener('click', (e) => {
+    const target = e.target;
+    const deleteBtn = target.closest('.delete-btn');
+    if (!deleteBtn)
+        return;
+    const box = deleteBtn.closest('.box');
+    if (!box)
+        return;
+    box.classList.add('deleting');
+    setTimeout(() => {
+        const taskId = box.dataset.taskId;
+        if (taskId) {
+            const index = tasks.findIndex(t => t.id === taskId);
+            if (index !== -1) {
+                tasks.splice(index, 1);
+            }
+        }
+        box.remove();
+        updateCreateButton();
+    }, 400);
 });
 updateCreateButton();
