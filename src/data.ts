@@ -30,6 +30,9 @@ interface Task {
 //DOM elements
 const tasks: Task[] = [];
 
+// local storage
+const STORAGE_KEY = 'tasks';
+
 const createButton = document.getElementById('createTask') as HTMLButtonElement;
 const taskForm = document.getElementById('taskForm') as HTMLFormElement;
 const inputBox = document.getElementById('inputBox') as HTMLDivElement;
@@ -47,6 +50,21 @@ function updateCreateButton(): void {
     createButton.classList.add('floating');
   }
   createButton.style.display = 'flex';
+}
+
+function saveTasks(): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+function loadTasks(): void {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  
+  if (stored) {
+    const parsed = JSON.parse(stored) as Task[];
+    tasks.push(...parsed);
+    parsed.forEach(task => renderTask(task));
+    updateCreateButton();
+  }
 }
 
 function showModal(): void {
@@ -199,6 +217,7 @@ taskForm.addEventListener('submit', (e) => {
   tasks.push(newTask);
   renderTask(newTask);
   updateCreateButton();
+  saveTasks()
   taskForm.reset();
   hideModal();
 });
@@ -224,6 +243,7 @@ taskList.addEventListener('click', (e) => {
     }
     box.remove();
     updateCreateButton();
+    saveTasks()
   }, 400);
 });
 
@@ -274,6 +294,7 @@ taskList.addEventListener('click', (e) => {
     }, 1200);
 
     updateCreateButton();
+    saveTasks()
   } else {
     box.classList.add('editing');
     box.innerHTML = renderEditForm(task);
@@ -305,7 +326,9 @@ taskList.addEventListener('click', (e) => {
     }
     box.remove();
     updateCreateButton();
+    saveTasks()
   }, 400);
 });
 
 updateCreateButton();
+loadTasks();

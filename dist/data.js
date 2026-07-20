@@ -17,6 +17,8 @@
 // }
 //DOM elements
 const tasks = [];
+// local storage
+const STORAGE_KEY = 'tasks';
 const createButton = document.getElementById('createTask');
 const taskForm = document.getElementById('taskForm');
 const inputBox = document.getElementById('inputBox');
@@ -33,6 +35,18 @@ function updateCreateButton() {
         createButton.classList.add('floating');
     }
     createButton.style.display = 'flex';
+}
+function saveTasks() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+function loadTasks() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+        const parsed = JSON.parse(stored);
+        tasks.push(...parsed);
+        parsed.forEach(task => renderTask(task));
+        updateCreateButton();
+    }
 }
 function showModal() {
     inputBox.style.display = 'block';
@@ -165,6 +179,7 @@ taskForm.addEventListener('submit', (e) => {
     tasks.push(newTask);
     renderTask(newTask);
     updateCreateButton();
+    saveTasks();
     taskForm.reset();
     hideModal();
 });
@@ -188,6 +203,7 @@ taskList.addEventListener('click', (e) => {
         }
         box.remove();
         updateCreateButton();
+        saveTasks();
     }, 400);
 });
 // button "Edit"
@@ -227,6 +243,7 @@ taskList.addEventListener('click', (e) => {
             newBox.classList.remove('edited-flash');
         }, 1200);
         updateCreateButton();
+        saveTasks();
     }
     else {
         box.classList.add('editing');
@@ -256,6 +273,8 @@ taskList.addEventListener('click', (e) => {
         }
         box.remove();
         updateCreateButton();
+        saveTasks();
     }, 400);
 });
 updateCreateButton();
+loadTasks();
