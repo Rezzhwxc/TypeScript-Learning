@@ -30,10 +30,12 @@ interface Task {
 //DOM elements
 const tasks: Task[] = [];
 
-const completedTask: number = 0;
 
 // local storage
 const STORAGE_KEY = 'tasks';
+
+const counterSpan = document.getElementById('num') as HTMLSpanElement;
+let completedCount: number = 0;
 
 const createButton = document.getElementById('createTask') as HTMLButtonElement;
 const taskForm = document.getElementById('taskForm') as HTMLFormElement;
@@ -68,6 +70,26 @@ function loadTasks(): void {
     updateCreateButton();
   }
 }
+
+function updateCounterDisplay(): void{
+  if(counterSpan){
+    counterSpan.textContent = String(completedCount)
+  }
+}
+
+function saveCompletedCount(): void{
+  localStorage.setItem('completedCount', String(completedCount));
+}
+
+function loadCompletedCount(): void {
+  const stored = localStorage.getItem('completedCount');
+  if (stored) {
+    completedCount = Number(stored);
+  }
+  updateCounterDisplay();
+}
+
+// 
 
 function showModal(): void {
   inputBox.style.display = 'block';
@@ -241,11 +263,14 @@ taskList.addEventListener('click', (e) => {
       const index = tasks.findIndex(t => t.id === taskId);
       if (index !== -1) {
         tasks.splice(index, 1);
+        completedCount++;
+        saveCompletedCount();
+        updateCounterDisplay();
       }
     }
     box.remove();
     updateCreateButton();
-    saveTasks()
+    saveTasks();
   }, 400);
 });
 
@@ -334,3 +359,4 @@ taskList.addEventListener('click', (e) => {
 
 updateCreateButton();
 loadTasks();
+loadCompletedCount();

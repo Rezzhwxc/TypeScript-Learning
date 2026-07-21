@@ -17,9 +17,10 @@
 // }
 //DOM elements
 const tasks = [];
-const completedTask = 0;
 // local storage
 const STORAGE_KEY = 'tasks';
+const counterSpan = document.getElementById('num');
+let completedCount = 0;
 const createButton = document.getElementById('createTask');
 const taskForm = document.getElementById('taskForm');
 const inputBox = document.getElementById('inputBox');
@@ -49,6 +50,22 @@ function loadTasks() {
         updateCreateButton();
     }
 }
+function updateCounterDisplay() {
+    if (counterSpan) {
+        counterSpan.textContent = String(completedCount);
+    }
+}
+function saveCompletedCount() {
+    localStorage.setItem('completedCount', String(completedCount));
+}
+function loadCompletedCount() {
+    const stored = localStorage.getItem('completedCount');
+    if (stored) {
+        completedCount = Number(stored);
+    }
+    updateCounterDisplay();
+}
+// 
 function showModal() {
     inputBox.style.display = 'block';
     inputBox.classList.remove('inputboxInactive');
@@ -200,6 +217,9 @@ taskList.addEventListener('click', (e) => {
             const index = tasks.findIndex(t => t.id === taskId);
             if (index !== -1) {
                 tasks.splice(index, 1);
+                completedCount++;
+                saveCompletedCount();
+                updateCounterDisplay();
             }
         }
         box.remove();
@@ -279,3 +299,4 @@ taskList.addEventListener('click', (e) => {
 });
 updateCreateButton();
 loadTasks();
+loadCompletedCount();
