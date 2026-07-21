@@ -186,6 +186,7 @@ body{
 }
 
 .box{
+    cursor: grab;
     position: relative;
     border: 2px solid rgb(155, 155, 155);
     background: linear-gradient(120deg, rgba(175, 175, 175, 0.523), rgba(94, 100, 100, 0.527), rgb(36, 36, 36));

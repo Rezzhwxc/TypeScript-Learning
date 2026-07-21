@@ -132,6 +132,7 @@ function createTaskElement(task: Task): HTMLDivElement {
   const box = document.createElement('div');
   box.className = 'box';
   box.dataset.taskId = task.id;
+  box.draggable = true;
 
   const editedText =
     task.createdAt === task.editedAt
@@ -355,6 +356,47 @@ taskList.addEventListener('click', (e) => {
     updateCreateButton();
     saveTasks()
   }, 400);
+});
+
+// moveable tasks
+
+let draggedElement: HTMLElement | null = null;
+
+taskList.addEventListener('dragstart', (e) => {
+  const target = e.target as HTMLElement;
+  const box = target.closest('.box') as HTMLDivElement | null;
+  if (!box) return;
+  draggedElement = box;
+  e.dataTransfer?.setData('text/plain', box.dataset.taskId || '');
+});
+
+taskList.addEventListener('dragover', (e) => {
+  e.preventDefault();
+});
+
+taskList.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const target = e.target as HTMLElement;
+  const box = target.closest('.box') as HTMLDivElement | null;
+  
+  // save and check
+  const el = draggedElement;
+  if (!box || !el || box === el) return;
+
+  taskList.insertBefore(el, box.nextSibling || null);
+
+  const oldIndex = tasks.findIndex(t => t.id === el.dataset.taskId);
+  const newIndex = tasks.findIndex(t => t.id === box.dataset.taskId);
+  if (oldIndex !== -1 && newIndex !== -1) {
+    const [moved] = tasks.splice(oldIndex, 1);
+    tasks.splice(newIndex, 0, moved);
+    saveTasks();
+  }
+  draggedElement = null;
+});
+
+taskList.addEventListener('dragend', () => {
+  draggedElement = null;
 });
 
 updateCreateButton();
