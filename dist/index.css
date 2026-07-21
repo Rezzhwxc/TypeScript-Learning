@@ -103,6 +103,29 @@ body{
     border-radius: 30px;
 }
 
+.count{
+    box-shadow: 0px 0px 5px rgb(199, 199, 199), inset 1px 1px 5px rgb(87, 87, 87);
+    border-radius: 30px;
+    position: absolute;
+    right: 30px; top: 30px;
+    margin: 5px; padding: 10px 20px;
+    font-family: 'Rimma-Sans';
+    font-size: 30px;
+    letter-spacing: 2px;
+    user-select: none;
+    background: linear-gradient(50deg,
+    rgb(190, 186, 186) 0%,     /* Очень темный */
+    rgba(179, 176, 176, 0.9) 10%,    /* Ваш #1c1c1d */
+    rgba(129, 129, 129, 0.9) 40%,     /* Темно-серый */
+    rgba(143, 140, 140, 0.9) 60%,    /* Серый */
+    rgb(190, 186, 186) 0%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; 
+    animation: gradient 2.3s ease reverse infinite;
+}
+
 #createTask{
     position: absolute;
     

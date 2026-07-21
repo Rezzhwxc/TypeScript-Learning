@@ -17,6 +17,7 @@
 // }
 //DOM elements
 const tasks = [];
+const completedTask = 0;
 // local storage
 const STORAGE_KEY = 'tasks';
 const createButton = document.getElementById('createTask');

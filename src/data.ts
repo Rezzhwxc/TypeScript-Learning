@@ -30,6 +30,8 @@ interface Task {
 //DOM elements
 const tasks: Task[] = [];
 
+const completedTask: number = 0;
+
 // local storage
 const STORAGE_KEY = 'tasks';
 
